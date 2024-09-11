@@ -1,5 +1,6 @@
 const aplikasietcRoute = require('./aplikasietc.route');
 const artikelRoute = require('./artikel.route');
+const carouselRoute = require('./carousel.route');
 const contactRoute = require('./contact.route');
 const personilRoute = require('./personil.route');
 const galeriRoute = require('./galeri.route');
@@ -15,6 +16,7 @@ const permissionRoute = require('./permission.route');
 module.exports = function (app, urlApi) {
     app.use(urlApi, aplikasietcRoute);
     app.use(urlApi, artikelRoute);
+    app.use(urlApi, carouselRoute);
     app.use(urlApi, contactRoute);
     app.use(urlApi, galeriRoute);
     app.use(urlApi, faqRoute);
