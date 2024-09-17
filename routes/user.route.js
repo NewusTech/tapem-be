@@ -7,7 +7,7 @@ const route = express.Router();
 
 route.post('/register', userController.createUser);
 route.post('/login', userController.loginUser);
-route.post('/logout', [mid.checkRolesAndLogout(['Super Admin', 'User'])], userController.logoutUser); 
+route.post('/logout', [mid.checkRolesAndLogout(['Super Admin'])], userController.logoutUser); 
 
 // API UNTUK ADMIN / SUPER ADMIN
 route.get('/user/get', [mid.checkRolesAndLogout(['Super Admin'])], userController.getuser); 
@@ -15,11 +15,11 @@ route.get('/user/get/:slug', [mid.checkRolesAndLogout(['Super Admin'])], userCon
 route.delete('/user/delete/:slug', [mid.checkRolesAndLogout(['Super Admin'])], userController.deleteuser);
 
 //API BUAT USER
-route.get('/getforuser', [mid.checkRolesAndLogout(['User', 'Super Admin'])], userController.getforuser); 
+route.get('/getforuser', [mid.checkRolesAndLogout(['Super Admin'])], userController.getforuser); 
 
-route.post('/changepassword/:slug', [mid.checkRolesAndLogout(['Verifikasi', 'Layanan', 'Super Admin', 'User', 'Kabag'])], userController.changePassword); 
+route.post('/changepassword/:slug', [mid.checkRolesAndLogout(['Super Admin'])], userController.changePassword); 
 
-route.post('/changepwadmin/:slug', [mid.checkRolesAndLogout(['Verifikasi', 'Layanan', 'Super Admin', 'User', 'Kabag'])], userController.changePasswordFromAdmin); 
+route.post('/changepwadmin/:slug', [mid.checkRolesAndLogout(['Super Admin' ])], userController.changePasswordFromAdmin); 
 
 route.post('/forgotpassword', userController.forgotPassword); 
 
