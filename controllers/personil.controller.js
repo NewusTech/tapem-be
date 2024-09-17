@@ -96,7 +96,7 @@ module.exports = {
                 Personil.findAll({
                     where: whereCondition,
                     include: [
-                        { model: Jabatan, attributes: ['id', 'title'] },
+                        { model: Jabatan, attributes: ['id', 'level', 'title'] },
                     ],
                     limit: limit,
                     offset: offset
@@ -104,7 +104,7 @@ module.exports = {
                 Personil.count({
                     where: whereCondition,
                     include: [
-                        { model: Jabatan, attributes: ['id', 'title'] },
+                        { model: Jabatan, attributes: ['id', 'level', 'title'] },
                     ],
                 })
             ]);
