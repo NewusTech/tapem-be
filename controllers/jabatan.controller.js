@@ -18,11 +18,16 @@ module.exports = {
                     type: "string",
                     min: 3,
                 },
+                level: {
+                    type: "number",
+                    min: 1
+                },
             }
 
             //buat object jabatan
             let jabatanCreateObj = {
                 title: req.body.title,
+                level: req.body.level !== undefined ? Number(req.body.level) : null
             }
 
             //validasi menggunakan module fastest-validator
@@ -123,11 +128,17 @@ module.exports = {
                     min: 3,
                     optional: true
                 },
+                level: {
+                    type: "number",
+                    min: 1,
+                    optional: true
+                }
             }
 
             //buat object jabatan
             let jabatanUpdateObj = {
                 title: req.body.title,
+                level: req.body.level !== undefined ? Number(req.body.level) : null
             }
 
             //validasi menggunakan module fastest-validator

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Jabatan.init({
     title: DataTypes.STRING,
+    level: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Jabatan',
