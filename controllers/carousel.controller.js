@@ -24,7 +24,7 @@ module.exports = {
             const schema = {
                 image: {
                     type: "string",
-                    optional: true
+                    optional: false
                 },
             }
 
@@ -146,7 +146,7 @@ module.exports = {
             const schema = {
                 image: {
                     type: "string",
-                    optional: true
+                    optional: false
                 },
             }
 
