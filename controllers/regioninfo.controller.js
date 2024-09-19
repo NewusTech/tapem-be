@@ -146,8 +146,8 @@ module.exports = {
 
       //buat object RegionInfos
       let RegionInfosUpdateObj = {
-        title: req.body.title,
-        description: req.body.description,
+        title: req.body.title ?? RegionInfosGet.title,
+        description: req.body.description ?? RegionInfosGet.description,
         image: req.file ? imageKey : RegionInfosGet.image,
       }
 
