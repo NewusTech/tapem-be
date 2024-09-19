@@ -215,11 +215,11 @@ module.exports = {
 
             //buat object artikel
             let artikelUpdateObj = {
-                title: req.body.title,
-                slug: req.body.title ? slugify(req.body.title, { lower: true }) : null,
-                desc: req.body.desc,
+                title: req.body.title ?? artikelGet.title,
+                slug: req.body.title ? slugify(req.body.title, { lower: true }) : artikelGet.slug,
+                desc: req.body.desc ?? artikelGet.desc,
                 image: req.file ? imageKey : artikelGet.image,
-                kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : null,
+                kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : artikelGet.kategori_id,
             }
 
             //validasi menggunakan module fastest-validator
@@ -249,6 +249,9 @@ module.exports = {
         } catch (err) {
             logger.error(`Error : ${err}`);
             logger.error(`Error message: ${err.message}`);
+            logger.error(process.env.AWS_S3_BUCKET);
+            logger.error(process.env.AWS_ACCESS_KEY_ID);
+            logger.error(process.env.PATH_AWS);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
