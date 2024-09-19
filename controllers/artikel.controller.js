@@ -86,6 +86,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(201).json(response(201, 'success create artikel', artikelCreate));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             
             console.log(err);
@@ -138,9 +140,9 @@ module.exports = {
             });
     
         } catch (err) {
-            res.status(500).json(response(500, 'internal server error', err));
             logger.error(`Error : ${err}`);
             logger.error(`Error message: ${err.message}`);
+            res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
     },
@@ -165,6 +167,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(200).json(response(200, 'success get artikel by slug', artikelGet));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -249,9 +253,6 @@ module.exports = {
         } catch (err) {
             logger.error(`Error : ${err}`);
             logger.error(`Error message: ${err.message}`);
-            logger.error(process.env.AWS_S3_BUCKET);
-            logger.error(process.env.AWS_ACCESS_KEY_ID);
-            logger.error(process.env.PATH_AWS);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -283,6 +284,8 @@ module.exports = {
             res.status(200).json(response(200, 'success delete artikel'));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
