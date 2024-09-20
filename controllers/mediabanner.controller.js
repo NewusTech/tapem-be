@@ -128,10 +128,10 @@ module.exports = {
       }
 
       const MediaBannerUpdateObj = {
-        title: req.body.title ?? MediaBannerGet.title,
-        subTitle: req.body.subTitle ?? MediaBannerGet.subTitle,
-        mediaLink: req.body.mediaLink ?? MediaBannerGet.mediaLink,
-        description: req.body.description ?? MediaBannerGet.description
+        title: req.body.title,
+        subTitle: req.body.subTitle,
+        mediaLink: req.body.mediaLink ,
+        description: req.body.description
       }
 
       //validasi menggunakan module fastest-validator
