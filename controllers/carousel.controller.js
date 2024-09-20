@@ -26,6 +26,10 @@ module.exports = {
                     type: "string",
                     optional: false
                 },
+                name: {
+                    type: "string",
+                    optional: true
+                }
             }
 
             if (req.file) {
@@ -50,6 +54,7 @@ module.exports = {
             //buat object Carousel
             let CarouselCreateObj = {
                 image: req.file ? imageKey : null,
+                name: req.body.name
             }
 
             //validasi menggunakan module fastest-validator
@@ -148,6 +153,10 @@ module.exports = {
                     type: "string",
                     optional: false
                 },
+                name: {
+                    type: "string",
+                    optional: true
+                }
             }
 
             if (req.file) {
@@ -171,6 +180,7 @@ module.exports = {
             //buat object Carousel
             let CarouselUpdateObj = {
                 image: req.file ? imageKey : CarouselGet.image,
+                name: req.body.name
             }
 
             //validasi menggunakan module fastest-validator
