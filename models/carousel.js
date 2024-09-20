@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Carousel.init({
     image: DataTypes.STRING,
+    name: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Carousel',

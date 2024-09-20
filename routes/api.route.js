@@ -14,6 +14,7 @@ const tupoksiRoute = require('./tupoksi.route');
 const permissionRoute = require('./permission.route');
 const regionInfoRoute = require('./regioninfo.route');
 const mediaBennerRoute = require('./mediabanner.route');
+const dashboardRoute = require('./dashboard.route');
 
 module.exports = function (app, urlApi) {
     app.use(urlApi, aplikasietcRoute);
@@ -32,4 +33,5 @@ module.exports = function (app, urlApi) {
     app.use(urlApi, permissionRoute);
     app.use(urlApi, regionInfoRoute);
     app.use(urlApi, mediaBennerRoute);
+    app.use(urlApi, dashboardRoute);
 }
