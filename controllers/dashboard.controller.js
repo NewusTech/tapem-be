@@ -18,6 +18,8 @@ module.exports = {
 
       res.status(200).json(response(200, "Scucces get data", { artikelCount, galeriCount, personilCount, aplikasiCount }));
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       res.status(500).json(response(500, "Internal Server Error", error));
       console.log(error);
     }

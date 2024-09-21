@@ -86,17 +86,20 @@ module.exports = {
 
   getRegionInfoById: async (req, res) => {
     try {
+      // Cari data Regioninfo Get by ID
       let regionInfo = await RegionInfo.findOne({
         where: {
           id: req.params.id
         }
       });
 
+      // Cek jika Regioninfo Get tidak ada
       if (!regionInfo) {
         res.status(404).json(response(404, 'data not found'));
         return;
       }
 
+      // response menggunakan helper response.formatter
       res.status(200).json(response(200, 'success get RegionInfo', regionInfo));
     } catch (err) {
       res.status(500).json(response(500, 'internal server error', err));

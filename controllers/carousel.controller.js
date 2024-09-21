@@ -70,6 +70,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(201).json(response(201, 'success create Carousel', CarouselCreate));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -126,6 +128,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(200).json(response(200, 'success get Carousel by id', CarouselGet));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -208,6 +212,8 @@ module.exports = {
             res.status(200).json(response(200, 'success update Carousel', CarouselAfterUpdate));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
