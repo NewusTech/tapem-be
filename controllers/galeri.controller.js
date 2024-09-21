@@ -67,6 +67,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(201).json(response(201, 'success create Galeri', GaleriCreate));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -99,6 +101,8 @@ module.exports = {
             });
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -123,6 +127,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(200).json(response(200, 'success get Galeri by id', GaleriGet));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -202,6 +208,8 @@ module.exports = {
             res.status(200).json(response(200, 'success update Galeri', GaleriAfterUpdate));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -233,6 +241,8 @@ module.exports = {
             res.status(200).json(response(200, 'success delete Galeri'));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }

@@ -104,6 +104,8 @@ module.exports = {
 
         } catch (err) {
             await transaction.rollback();
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             if (err.name === 'SequelizeUniqueConstraintError') {
                 // Menangani error khusus untuk constraint unik
                 res.status(400).json({

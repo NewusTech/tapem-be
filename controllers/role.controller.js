@@ -35,6 +35,8 @@ module.exports = {
 
             res.status(201).json(response(201, 'success create role', roleCreate));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -49,6 +51,8 @@ module.exports = {
             res.status(200).json(response(200, 'success get role', roleGets));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -72,6 +76,8 @@ module.exports = {
 
             res.status(200).json(response(200, 'success get role by id', roleGet));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -131,6 +137,8 @@ module.exports = {
             res.status(200).json(response(200, 'success update role', roleAfterUpdate));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }

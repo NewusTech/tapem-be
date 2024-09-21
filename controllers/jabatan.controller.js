@@ -166,6 +166,8 @@ module.exports = {
             res.status(200).json(response(200, 'success update jabatan', jabatanAfterUpdate));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }

@@ -54,6 +54,8 @@ module.exports = {
       res.status(200).json(response(200, 'success create Media Banner', mediaBannerCreate));
 
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       res.status(500).json(response(500, 'internal server error', error));
       console.log(error);
     }
@@ -65,6 +67,8 @@ module.exports = {
 
       res.status(200).json(response(200, 'success get Media Banner', mediaBanner));
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       response(res, 400, false, 'Get Media Banner Failed', error);
       console.log(error);
     }
@@ -85,6 +89,8 @@ module.exports = {
 
       res.status(200).json(response(200, 'success get Media Banner', mediaBanner));
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       response(res, 400, false, 'Get Media Banner Failed', error);
       console.log(error);
     }
@@ -158,6 +164,8 @@ module.exports = {
       //response menggunakan helper response.formatter
       res.status(200).json(response(200, 'success update Media Banner', MediaBannerAfterUpdate));
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       res.status(500).json(response(500, 'internal server error', error));
       console.log(error);
     }
@@ -187,6 +195,8 @@ module.exports = {
       res.status(200).json(response(200, 'success delete Media Banner'));
 
     } catch (error) {
+      logger.error(`Error : ${err}`);
+      logger.error(`Error message: ${err.message}`);
       res.status(500).json(response(500, 'internal server error', error));
       console.log(error);
     }

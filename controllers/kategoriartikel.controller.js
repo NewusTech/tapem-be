@@ -38,6 +38,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(201).json(response(201, 'success create kategori artikel', kategoriartikelCreate));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -69,6 +71,8 @@ module.exports = {
             res.status(200).json(response(200, 'success get DATA', kategoriartikelGets));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -93,6 +97,8 @@ module.exports = {
             //response menggunakan helper response.formatter
             res.status(200).json(response(200, 'success get kategoriartikel by id', kategoriartikelGet));
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
@@ -155,6 +161,8 @@ module.exports = {
             res.status(200).json(response(200, 'success update kategoriartikel', kategoriartikelAfterUpdate));
 
         } catch (err) {
+            logger.error(`Error : ${err}`);
+            logger.error(`Error message: ${err.message}`);
             res.status(500).json(response(500, 'internal server error', err));
             console.log(err);
         }
