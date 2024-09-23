@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     slug: DataTypes.STRING,
     desc: DataTypes.TEXT,
+    mediaLink: DataTypes.STRING,
     image: DataTypes.STRING,
     kategori_id: DataTypes.INTEGER,
   }, {
