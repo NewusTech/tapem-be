@@ -23,6 +23,7 @@ module.exports = {
             //membuat schema untuk validasi
             const schema = {
                 title: { type: "string", min: 3 },
+                mediaLink: {type: "string", min: 3, optional: true},
                 image: {
                     type: "string",
                     optional: true
@@ -52,6 +53,7 @@ module.exports = {
             let GaleriCreateObj = {
                 title: req.body.title,
                 image: req.file ? imageKey : undefined,
+                mediaLink: req.body.mediaLink
             }
 
             //validasi menggunakan module fastest-validator
@@ -153,6 +155,7 @@ module.exports = {
             //membuat schema untuk validasi
             const schema = {
                 title: { type: "string", min: 3, optional: true },
+                mediaLink: {type: "string", min: 3, optional: true},
                 image: {
                     type: "string",
                     optional: true
@@ -181,6 +184,7 @@ module.exports = {
             let GaleriUpdateObj = {
                 title: req.body.title,
                 image: req.file ? imageKey : GaleriGet.image,
+                mediaLink: req.body.mediaLink
             }
 
             //validasi menggunakan module fastest-validator
