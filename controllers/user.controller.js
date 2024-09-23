@@ -162,7 +162,7 @@ module.exports = {
 
             let userinfo = await Userinfo.findOne({
                 where: whereClause,
-                attributes: ['nik', 'email', 'id', 'telepon'],
+                attributes: ['nik', 'email', 'id', 'telepon', 'name'],
                 include: [
                     {
                         model: User,
@@ -198,6 +198,7 @@ module.exports = {
             // membuat token jwt
             let token = jwt.sign({
                 userId: userinfo.id,
+                name: userinfo.name,
                 user_akun_id: userinfo.User.id,
                 nik: userinfo.nik,
                 role: userinfo.User.Role.name,
