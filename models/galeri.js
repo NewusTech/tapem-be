@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Galeri.init({
     title: DataTypes.STRING,
     image: DataTypes.STRING,
+    mediaLink: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Galeri',

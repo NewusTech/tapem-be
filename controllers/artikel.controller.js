@@ -29,6 +29,7 @@ module.exports = {
                 title: { type: "string", min: 3 },
                 desc: { type: "string", min: 3, optional: true },
                 image: { type: "string", optional: true },
+                mediaLink:{type: "string", optional: true},
                 kategori_id: { type: "number", optional: true }
             }
 
@@ -57,6 +58,7 @@ module.exports = {
                 slug: req.body.title ? slugify(req.body.title, { lower: true }) : null,
                 desc: req.body.desc,
                 image: req.file ? imageKey : null,
+                mediaLink: req.body.mediaLink,
                 kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : null,
             }
 
@@ -195,6 +197,7 @@ module.exports = {
                 title: { type: "string", min: 3, optional: true },
                 desc: { type: "string", min: 3, optional: true },
                 image: { type: "string", optional: true },
+                mediaLink: { type: "string", optional: true },
                 kategori_id: { type: "number", optional: true }
             }
 
@@ -223,6 +226,7 @@ module.exports = {
                 slug: req.body.title ? slugify(req.body.title, { lower: true }) : artikelGet.slug,
                 desc: req.body.desc ?? artikelGet.desc,
                 image: req.file ? imageKey : artikelGet.image,
+                mediaLink: req.body.mediaLink ?? artikelGet.mediaLink,
                 kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : artikelGet.kategori_id,
             }
 
