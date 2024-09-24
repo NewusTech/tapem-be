@@ -1,7 +1,6 @@
 const { response } = require('../helpers/response.formatter');
-
 const { Contact } = require('../models');
-
+const logger = require('../errorHandler/logger');
 const Validator = require("fastest-validator");
 const v = new Validator();
 const { Op } = require('sequelize');

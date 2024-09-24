@@ -2,6 +2,7 @@ const { response } = require('../helpers/response.formatter');
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 const { RegionInfo } = require('../models');
 const Validator = require("fastest-validator");
+const logger = require('../errorHandler/logger');
 const v = new Validator();
 
 

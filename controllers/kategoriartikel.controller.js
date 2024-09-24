@@ -1,5 +1,5 @@
 const { response } = require('../helpers/response.formatter');
-
+const logger = require('../errorHandler/logger');
 const { Kategoriartikel } = require('../models');
 
 const Validator = require("fastest-validator");

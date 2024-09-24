@@ -1,8 +1,8 @@
 const { response } = require('../helpers/response.formatter');
-
 const { Artikel, Kategoriartikel } = require('../models');
 const slugify = require('slugify');
 const Validator = require("fastest-validator");
+const logger = require('../errorHandler/logger');
 const v = new Validator();
 const moment = require('moment-timezone');
 const { generatePagination } = require('../pagination/pagination');
@@ -33,23 +33,41 @@ module.exports = {
                 kategori_id: { type: "number", optional: true }
             }
 
-            if (req.file) {
-                const timestamp = new Date().getTime();
-                const uniqueFileName = `${timestamp}-${req.file.originalname}`;
+            if (req.files) {
+                if (req.files.image) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.image[0].originalname}`;
 
-                const uploadParams = {
-                    Bucket: process.env.AWS_S3_BUCKET,
-                    Key: `${process.env.PATH_AWS}/artikel/${uniqueFileName}`,
-                    Body: req.file.buffer,
-                    ACL: 'public-read',
-                    ContentType: req.file.mimetype
-                };
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
+                        Body: req.files.image[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.image[0].mimetype
+                    };
 
-                const command = new PutObjectCommand(uploadParams);
+                    const command = new PutObjectCommand(uploadParams);
 
-                await s3Client.send(command);
+                    await s3Client.send(command);
 
-                imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                    imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
+                if (req.files.mediaLink) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.mediaLink[0].originalname}`;
+
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/video${uniqueFileName}`,
+                        Body: req.files.mediaLink[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.mediaLink[0].mimetype
+                    };
+                    const command = new PutObjectCommand(uploadParams);
+
+                    await s3Client.send(command);
+                    mediaLink = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
             }
 
             //buat object artikel
@@ -57,8 +75,8 @@ module.exports = {
                 title: req.body.title,
                 slug: req.body.title ? slugify(req.body.title, { lower: true }) : null,
                 desc: req.body.desc,
-                image: req.file ? imageKey : null,
-                mediaLink: req.body.mediaLink,
+                image: req.files.image ? imageKey : null,
+                mediaLink: req.files.mediaLink ? mediaLink : null,
                 kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : null,
             }
 
@@ -201,23 +219,41 @@ module.exports = {
                 kategori_id: { type: "number", optional: true }
             }
 
-            if (req.file) {
-                const timestamp = new Date().getTime();
-                const uniqueFileName = `${timestamp}-${req.file.originalname}`;
+            if (req.files) {
+                if (req.files.image) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.image[0].originalname}`;
 
-                const uploadParams = {
-                    Bucket: process.env.AWS_S3_BUCKET,
-                    Key: `${process.env.PATH_AWS}/artikel/${uniqueFileName}`,
-                    Body: req.file.buffer,
-                    ACL: 'public-read',
-                    ContentType: req.file.mimetype
-                };
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
+                        Body: req.files.image[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.image[0].mimetype
+                    };
 
-                const command = new PutObjectCommand(uploadParams);
+                    const command = new PutObjectCommand(uploadParams);
 
-                await s3Client.send(command);
+                    await s3Client.send(command);
 
-                imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                    imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
+                if (req.files.mediaLink) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.mediaLink[0].originalname}`;
+
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/video${uniqueFileName}`,
+                        Body: req.files.mediaLink[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.mediaLink[0].mimetype
+                    };
+                    const command = new PutObjectCommand(uploadParams);
+
+                    await s3Client.send(command);
+                    mediaLink = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
             }
 
             //buat object artikel
@@ -225,8 +261,8 @@ module.exports = {
                 title: req.body.title ?? artikelGet.title,
                 slug: req.body.title ? slugify(req.body.title, { lower: true }) : artikelGet.slug,
                 desc: req.body.desc ?? artikelGet.desc,
-                image: req.file ? imageKey : artikelGet.image,
-                mediaLink: req.body.mediaLink ?? artikelGet.mediaLink,
+                image: req.files.image ? imageKey : artikelGet.image,
+                mediaLink: req.files.mediaLink ? mediaLink : artikelGet.mediaLink,
                 kategori_id: req.body.kategori_id !== undefined ? Number(req.body.kategori_id) : artikelGet.kategori_id,
             }
 

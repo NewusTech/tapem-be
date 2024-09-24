@@ -1,6 +1,7 @@
 const { response } = require('../helpers/response.formatter');
 const { Galeri } = require('../models');
 const Validator = require("fastest-validator");
+const logger = require('../errorHandler/logger');
 const v = new Validator();
 const { generatePagination } = require('../pagination/pagination');
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
@@ -23,37 +24,55 @@ module.exports = {
             //membuat schema untuk validasi
             const schema = {
                 title: { type: "string", min: 3 },
-                mediaLink: {type: "string", min: 3, optional: true},
+                mediaLink: { type: "string", min: 3, optional: true },
                 image: {
                     type: "string",
                     optional: true
                 },
             }
 
-            if (req.file) {
-                const timestamp = new Date().getTime();
-                const uniqueFileName = `${timestamp}-${req.file.originalname}`;
+            if (req.files) {
+                if (req.files.image) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.image[0].originalname}`;
 
-                const uploadParams = {
-                    Bucket: process.env.AWS_S3_BUCKET,
-                    Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
-                    Body: req.file.buffer,
-                    ACL: 'public-read',
-                    ContentType: req.file.mimetype
-                };
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
+                        Body: req.files.image[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.image[0].mimetype
+                    };
 
-                const command = new PutObjectCommand(uploadParams);
+                    const command = new PutObjectCommand(uploadParams);
 
-                await s3Client.send(command);
+                    await s3Client.send(command);
 
-                imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                    imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
+                if (req.files.mediaLink) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.mediaLink[0].originalname}`;
+
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/video${uniqueFileName}`,
+                        Body: req.files.mediaLink[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.mediaLink[0].mimetype
+                    };
+                    const command = new PutObjectCommand(uploadParams);
+
+                    await s3Client.send(command);
+                    mediaLink = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
             }
 
             //buat object Galeri
             let GaleriCreateObj = {
                 title: req.body.title,
-                image: req.file ? imageKey : undefined,
-                mediaLink: req.body.mediaLink
+                image: req.files ? imageKey : undefined,
+                mediaLink: req.files ? mediaLink : undefined
             }
 
             //validasi menggunakan module fastest-validator
@@ -155,36 +174,55 @@ module.exports = {
             //membuat schema untuk validasi
             const schema = {
                 title: { type: "string", min: 3, optional: true },
-                mediaLink: {type: "string", min: 3, optional: true},
+                mediaLink: { type: "string", min: 3, optional: true },
                 image: {
                     type: "string",
                     optional: true
                 },
             }
 
-            if (req.file) {
-                const timestamp = new Date().getTime();
-                const uniqueFileName = `${timestamp}-${req.file.originalname}`;
+            if (req.files) {
+                if (req.files.image) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.image[0].originalname}`;
 
-                const uploadParams = {
-                    Bucket: process.env.AWS_S3_BUCKET,
-                    Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
-                    Body: req.file.buffer,
-                    ACL: 'public-read',
-                    ContentType: req.file.mimetype
-                };
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/${uniqueFileName}`,
+                        Body: req.files.image[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.image[0].mimetype
+                    };
 
-                const command = new PutObjectCommand(uploadParams);
-                await s3Client.send(command);
-                
-                imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                    const command = new PutObjectCommand(uploadParams);
+                    await s3Client.send(command);
+
+                    imageKey = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
+
+                if (req.files.mediaLink) {
+                    const timestamp = new Date().getTime();
+                    const uniqueFileName = `${timestamp}-${req.files.mediaLink[0].originalname}`;
+
+                    const uploadParams = {
+                        Bucket: process.env.AWS_S3_BUCKET,
+                        Key: `${process.env.PATH_AWS}/galeri/video${uniqueFileName}`,
+                        Body: req.files.mediaLink[0].buffer,
+                        ACL: 'public-read',
+                        ContentType: req.files.mediaLink[0].mimetype
+                    };
+                    const command = new PutObjectCommand(uploadParams);
+
+                    await s3Client.send(command);
+                    mediaLink = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
+                }
             }
 
             //buat object Galeri
             let GaleriUpdateObj = {
                 title: req.body.title,
-                image: req.file ? imageKey : GaleriGet.image,
-                mediaLink: req.body.mediaLink
+                image: req.files ? imageKey : GaleriGet.image,
+                mediaLink: req.files ? mediaLink : GaleriGet.mediaLink
             }
 
             //validasi menggunakan module fastest-validator

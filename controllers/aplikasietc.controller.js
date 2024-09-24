@@ -1,6 +1,7 @@
 const { response } = require('../helpers/response.formatter');
 const { Aplikasietcs } = require('../models');
 const Validator = require("fastest-validator");
+const logger = require('../errorHandler/logger');
 const v = new Validator();
 const { generatePagination } = require('../pagination/pagination');
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
