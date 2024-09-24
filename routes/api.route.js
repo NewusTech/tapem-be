@@ -15,6 +15,7 @@ const permissionRoute = require('./permission.route');
 const regionInfoRoute = require('./regioninfo.route');
 const mediaBennerRoute = require('./mediabanner.route');
 const dashboardRoute = require('./dashboard.route');
+const sambutanRoute = require('./sambutan.route');
 
 module.exports = function (app, urlApi) {
     app.use(urlApi, aplikasietcRoute);
@@ -34,4 +35,5 @@ module.exports = function (app, urlApi) {
     app.use(urlApi, regionInfoRoute);
     app.use(urlApi, mediaBennerRoute);
     app.use(urlApi, dashboardRoute);
+    app.use(urlApi, sambutanRoute);
 }
