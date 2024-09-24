@@ -1,5 +1,6 @@
 const { response } = require("../helpers/response.formatter");
 const { Artikel, Galeri, Personil, Aplikasietcs } = require("../models");
+const logger = require('../errorHandler/logger');
 
 module.exports = {
   getDashboardData: async (req, res) => {

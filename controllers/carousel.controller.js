@@ -2,6 +2,7 @@ const { response } = require('../helpers/response.formatter');
 const { Carousel } = require('../models');
 const Validator = require("fastest-validator");
 const v = new Validator();
+const logger = require('../errorHandler/logger');
 const { generatePagination } = require('../pagination/pagination');
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 
