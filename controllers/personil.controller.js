@@ -26,6 +26,10 @@ module.exports = {
             const schema = {
                 name: { type: "string", min: 3 },
                 jabatan_id: { type: "number", optional: true },
+                nip: { type: "string", optional: true },
+                phoneNumber: { type: "string", min: 3, optional: true },
+                educationHistory: { type: "string", optional: true },
+                positionHistory: { type: "string", optional: true },
                 image: { type: "string", optional: true }
             }
 
@@ -51,6 +55,10 @@ module.exports = {
             //buat object personil
             let personilCreateObj = {
                 name: req.body.name,
+                nip: req.body.nip,
+                phoneNumber: req.body.phoneNumber,
+                educationHistory: req.body.educationHistory,
+                positionHistory: req.body.positionHistory,
                 jabatan_id: req.body.jabatan_id !== undefined ? Number(req.body.jabatan_id) : null,
                 image: req.file ? imageKey : null
             }
@@ -176,6 +184,10 @@ module.exports = {
             //membuat schema untuk validasi
             const schema = {
                 name: { type: "string", min: 3, optional: true },
+                nip: { type: "string", min: 3, optional: true },
+                phoneNumber: { type: "string", min: 3, optional: true },
+                educationHistory: { type: "string", optional: true },
+                positionHistory: { type: "string", optional: true },
                 image: { type: "string", optional: true },
                 jabatan_id: { type: "number", optional: true }
             }
@@ -202,8 +214,12 @@ module.exports = {
             //buat object personil
             let personilUpdateObj = {
                 name: req.body.name,
+                nip: req.body.nip,
+                phoneNumber: req.body.phoneNumber,
+                educationHistory: req.body.educationHistory,
+                positionHistory: req.body.positionHistory,
                 image: req.file ? imageKey : personilGet.image,
-                jabatan_id: req.body.jabatan_id !== undefined ? Number(req.body.jabatan_id) : null,
+                jabatan_id: Number(req.body.jabatan_id) ?? personilGet.jabatan_id,
             }
 
             //validasi menggunakan module fastest-validator
