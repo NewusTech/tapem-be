@@ -71,8 +71,8 @@ module.exports = {
             //buat object Galeri
             let GaleriCreateObj = {
                 title: req.body.title,
-                image: req.files ? imageKey : undefined,
-                mediaLink: req.files ? mediaLink : undefined
+                image: req.files.image ? imageKey : undefined,
+                mediaLink: req.files.mediaLink ? mediaLink : undefined
             }
 
             //validasi menggunakan module fastest-validator
@@ -221,8 +221,8 @@ module.exports = {
             //buat object Galeri
             let GaleriUpdateObj = {
                 title: req.body.title,
-                image: req.files ? imageKey : GaleriGet.image,
-                mediaLink: req.files ? mediaLink : GaleriGet.mediaLink
+                image: req.files.image ? imageKey : GaleriGet.image,
+                mediaLink: req.files.mediaLink ? mediaLink : GaleriGet.mediaLink
             }
 
             //validasi menggunakan module fastest-validator
