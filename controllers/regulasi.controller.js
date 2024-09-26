@@ -49,6 +49,27 @@ module.exports = {
       console.log(err);
     }
   },
+  getRegulasiByID: async (req, res) => {
+    try {
+      const RegulasiGet = await Regulasi.findOne({
+        where: {
+          id: req.params.id
+        }
+      });
+
+      if (!RegulasiGet) {
+        res.status(404).json(response(404, 'Regulasi not found'));
+        return;
+      }
+
+      res.status(200).json(response(200, 'success get Regulasi', RegulasiGet));
+    } catch (error) {
+      logger.error(`Error : ${error}`);
+      logger.error(`Error message: ${error.message}`);
+      console.log(error);
+      return res.status(200).json(response(200, 'success get Regulasi', error)); 
+    }
+  },
 
   createRegulasi: async (req, res) => {
     try {
@@ -134,7 +155,7 @@ module.exports = {
         await s3Client.send(command);
         req.body.file = `https://${process.env.AWS_S3_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${uploadParams.Key}`;
       }
-      
+
       const regulasiObjUpdate = {
         title: req.body.title,
         file: req.body.file ?? RegulasiGet.file
@@ -146,7 +167,7 @@ module.exports = {
         }
       });
 
-      res.status(200).json(response(200, 'success update Regulasi', ));
+      res.status(200).json(response(200, 'success update Regulasi',));
 
     } catch (err) {
       logger.error(`Error : ${err}`);
