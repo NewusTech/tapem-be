@@ -16,6 +16,7 @@ const regionInfoRoute = require('./regioninfo.route');
 const mediaBennerRoute = require('./mediabanner.route');
 const dashboardRoute = require('./dashboard.route');
 const sambutanRoute = require('./sambutan.route');
+const regulasiRoute = require('./regulasi.route');
 
 module.exports = function (app, urlApi) {
     app.use(urlApi, aplikasietcRoute);
@@ -36,4 +37,5 @@ module.exports = function (app, urlApi) {
     app.use(urlApi, mediaBennerRoute);
     app.use(urlApi, dashboardRoute);
     app.use(urlApi, sambutanRoute);
+    app.use(urlApi, regulasiRoute);
 }
