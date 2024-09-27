@@ -9,7 +9,7 @@ const v = new Validator();
 module.exports = {
   getSambutan: async (req, res) => {
     try {
-      const sambutan = await Sambutan.findOne({
+      const sambutan = await Sambutan.findAll({
         include: [
           {
             model: Personil,
