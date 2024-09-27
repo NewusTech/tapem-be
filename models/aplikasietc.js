@@ -16,5 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Aplikasietcs',
   });
+
+  Aplikasietcs.addHook('beforeFind', (options) => {
+    if (!options.order) {
+      options.order = [['id', 'ASC']]; // Default order by createdAt DESC
+    }
+  });
   return Aplikasietcs;
 };

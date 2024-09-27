@@ -22,5 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Personil',
   });
+  
+  Personil.addHook('beforeFind', (options) => {
+    if (!options.order) {
+      options.order = [['id', 'ASC']]; // Default order by createdAt DESC
+    }
+  });
   return Personil;
 };
