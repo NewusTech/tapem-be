@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Faq.init({
     question: DataTypes.STRING,
-    answer: DataTypes.STRING
+    answer: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Faq',
