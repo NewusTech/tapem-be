@@ -18,6 +18,8 @@ const dashboardRoute = require('./dashboard.route');
 const sambutanRoute = require('./sambutan.route');
 const regulasiRoute = require('./regulasi.route');
 const lppdRoute = require('./lppd.route');
+const strukturOrganisasiRoute = require('./strukturorganisasi.route');
+const socialMediaRoute = require('./socialmedia.route');
 
 module.exports = function (app, urlApi) {
     app.use(urlApi, aplikasietcRoute);
@@ -40,4 +42,6 @@ module.exports = function (app, urlApi) {
     app.use(urlApi, sambutanRoute);
     app.use(urlApi, regulasiRoute);
     app.use(urlApi, lppdRoute);
+    app.use(urlApi, strukturOrganisasiRoute);
+    app.use(urlApi, socialMediaRoute);
 }
