@@ -38,7 +38,8 @@ module.exports = {
           type: 'string',
           optional: true,
           min: 3
-        }
+        },
+        typevideo: { type: "string", optional: true, convert: true },
       };
 
       if (req.file) {
@@ -63,7 +64,8 @@ module.exports = {
         title: req.body.title,
         subTitle: req.body.subTitle,
         mediaLink: mediaLink,
-        description: req.body.description
+        description: req.body.description,
+        typevideo: req.body.typevideo,
       };
 
       // validasi menggunakan module fastest-validator
@@ -144,7 +146,8 @@ module.exports = {
           type: "string",
           optional: true,
           min: 3
-        }
+        },
+        typevideo: { type: "string", optional: true, convert: true },
       }
 
       //mendapatkan data MediaBanner untuk pengecekan
@@ -180,7 +183,8 @@ module.exports = {
         title: req.body.title,
         subTitle: req.body.subTitle,
         mediaLink: req.file ? mediaLink : MediaBannerGet.mediaLink,
-        description: req.body.description
+        description: req.body.description,
+        typevideo: req.body.typevideo,
       }
 
       //validasi menggunakan module fastest-validator

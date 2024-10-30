@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    typevideo: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'RegionInfo',

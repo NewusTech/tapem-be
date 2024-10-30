@@ -3,12 +3,12 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn('RegionInfos', 'typevideo', {
+    await queryInterface.addColumn('MediaBanners', 'typevideo', {
       type: Sequelize.SMALLINT,
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('RegionInfos', 'typevideo');
+    await queryInterface.removeColumn('MediaBanners', 'typevideo');
   }
 };

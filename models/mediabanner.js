@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     subTitle: DataTypes.STRING,
     mediaLink: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    typevideo: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'MediaBanner',
