@@ -28,6 +28,7 @@ module.exports = {
           optional: true
         },
         description: { type: "string", optional: true },
+        typevideo: { type: "string", optional: true, convert: true },
       }
 
       if (req.file) {
@@ -54,6 +55,7 @@ module.exports = {
         title: req.body.title,
         description: req.body.description,
         image: req.file ? imageKey : undefined,
+        typevideo: req.body.typevideo,
       }
 
       //validasi menggunakan module fastest-validator
@@ -127,7 +129,8 @@ module.exports = {
       const schema = {
         title: { type: "string", min: 3, optional: true },
         image: { type: "string", optional: true },
-        description: { type: "string", min: 3, optional: true }
+        description: { type: "string", min: 3, optional: true },
+        typevideo: { type: "string", optional: true, convert: true },
       }
 
       if (req.file) {
@@ -153,6 +156,7 @@ module.exports = {
         title: req.body.title ?? RegionInfosGet.title,
         description: req.body.description ?? RegionInfosGet.description,
         image: req.file ? imageKey : RegionInfosGet.image,
+        typevideo: req.body.typevideo ?? RegionInfosGet.typevideo,
       }
 
       //validasi menggunakan module fastest-validator
